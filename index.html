@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HpDesignJet500Calc</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.nice-select.js"></script>
+
+</head>
+
+<body>
+
+    <main>
+        <div class="counter">
+            <div class="header">
+                <p>Введіть параметри друку</p>
+            </div>
+
+            <div id="tabs">
+                <div class="tabContainer">
+                    <div class="tab border" id='nonstadartTab'>Нестандартний друк</div>
+                    <div class="tab" id="standartTab">Cтандартні формати</div>
+                </div>
+
+
+                <div class="content">
+                    <div class="setSizeOfPaper">
+                        <p>вкажіть розмір паперу</p>
+                    </div>
+                    <div class="inputForms">
+                        <input type="number" class="form-control" id="widthPaper" placeholder="ширина паперу">
+                        <input type="number" class="form-control" id="lenghtPaper" placeholder="довжина паперу">
+                    </div>
+
+
+                </div>
+                <!--content-->
+
+                <div class="content">
+
+                    <div class="standart">
+                        <p>Оберіть формат</p>
+                    </div>
+                    <div id="selectStandartPaper">
+                        <select class="wide" id="standartPaper">
+                            <option value="1">А2</option>
+                            <option value="2">А1</option>
+                            <option value="3">А0</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+
+
+
+                <div class="setTypeOfPaper">
+                    <p>виберіть типу паперу</p>
+                </div>
+                <div id="selectPaper">
+                    <select class="wide" id="select">
+                        <option value="1">Інженерний</option>
+                        <option value="2">Ватман</option>
+                        <option value="3">Фотопапір</option>
+                    </select>
+                </div>
+
+
+                <div class="setFill">
+                    <p>вкажіть заповення</p>
+                </div>
+                <div class="fillness">
+                    <label class="container">0-30%
+                        <input type="radio" name="ink" value="1" checked="">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">31-80%
+                        <input type="radio" name="ink" value="2">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">81-100%
+                        <input type="radio" name="ink" value="3">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <div class="colorAndQuantity">
+                    <label class="container">Кольоровий
+                        <input type="radio" name="color" value="5">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container"> Ч/Б
+                        <input type="radio" name="color" value="6" checked>
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <div class="setQuantity">
+                        <div class="quantity">
+                            <p>кількість</p>
+                        </div>
+                        <div class="inputForms">
+                            <input type="number" class="form-control" id="numberOf" value='1'>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <input type="submit" id="submitButton" value="ПОРАХУВАТИ">
+                <input type="text" id="price" value="">
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+    </main>
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>

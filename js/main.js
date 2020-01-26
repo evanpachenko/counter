@@ -6,7 +6,7 @@ window.onload = function () {
     tab = document.getElementsByClassName('tab');
 
     hideTabsContent(1);
-}
+};
 
 
 function hideTabsContent(a) {
@@ -46,96 +46,62 @@ $(document).ready(function () {
     $('select').niceSelect();
 });
 
+const COLOR_PRINT = "color";
 
+const COLOR_VALUES = [64, 164, 264];
+const MONOCHROME_VALUES = [30, 52, 100];
 
-var engeneerPaper = 12;
-var vatmanPaper = 16;
-var photoPaper = 70;
+const LENGTH = "l";
+const WIGHT = "w";
 
-var fillFirstColor = 64;
-var fillSecondColor = 164;
-var fillThirdColor = 264;
+// це дозволить легко додавати ще один розмір паперу
+const PAPERS = {
+    A2: {"l": 420, "w": 590},
+    A1: {"l": 840, "w": 590},
+    A0: {"l": 840, "w": 1180}
+};
 
-var fillfirstBlack = 30;
-var fillSecondBlack = 52;
-var fillThirdBlack = 100;
+function square(sizes) {
+    return sizes[LENGTH] * sizes[WIGHT] / 1000000;
+}
 
-
-function findSquare(l, w) {
+function findSquare() {
+    var sizes = {};
     var tabChooser = document.getElementById('nonstadartTab');
     if (tabChooser.classList.contains('border')) {
-        w = document.getElementById('widthPaper').value;
-        l = document.getElementById('lenghtPaper').value;
+        sizes[WIGHT] = document.getElementById('widthPaper').value;
+        sizes[LENGTH] = document.getElementById('lenghtPaper').value;
     } else {
         var choosenPaper = document.getElementById('standartPaper').value;
-        if (choosenPaper == 1) {
-            l = 420;
-            w = 590;
-        } else if (choosenPaper == 2) {
-            l = 840;
-            w = 590;
-        } else {
-            l = 840;
-            w = 1180;
-        }
-
-    };
-
-    return l * w / 1000000;
+        sizes = PAPERS[choosenPaper];
+    }
+    return square(sizes);
 }
 
 
-function findFill(fill, color, fillness) {
-    fill = document.getElementsByName('ink');
-    color = document.getElementsByName('color');
-    fillness;
-    for (var j = 0; j < color.length; j++) {
-        if (color[j].checked) {
-            if (color[j].value == 5) {
+function findFill() {
+    var colorChecked = $( "input[name$='color']:checked");
+    var inkChecked = $( "input[name$='ink']:checked");
+    var fillness;
 
+    if (colorChecked.length !== 1 || inkChecked.length !== 1) {
+        console.log("Only one of values should be selected!");
+        return 0;
+    }
+    colorChecked = colorChecked[0].value;
+    inkChecked = inkChecked[0].value;
 
-                for (var k = 0; k < fill.length; k++) {
-                    if (fill[k].checked) {
-                        if (fill[k].value == 1) {
-                            fillness = fillFirstColor;
-                        } else if (fill[k].value == 2) {
-                            fillness = fillSecondColor;
-                        } else {
-                            fillness = fillThirdColor;
-                        }
-                    }
-                }
-
-
-            } else {
-                for (var m = 0; m < fill.length; m++) {
-                    if (fill[m].checked) {
-                        if (fill[m].value == 1) {
-                            fillness = fillfirstBlack;
-                        } else if (fill[m].value == 2) {
-                            fillness = fillSecondBlack;
-                        } else {
-                            fillness = fillThirdBlack;
-                        }
-                    }
-                }
-            }
-        }
-
-    };
-    return fillness;
-};
-
-function selectPaper(paper, paperValue) {
-    paper = document.getElementById('select').value;
-    if (paper == 1) {
-        paperValue = engeneerPaper;
-    } else if (paper == 2) {
-        paperValue = vatmanPaper;
+    if (colorChecked === COLOR_PRINT) {
+        fillness = COLOR_VALUES[inkChecked]
     } else {
-        paperValue = photoPaper;
-    };
-    return paperValue;
+        fillness = MONOCHROME_VALUES[inkChecked];
+    }
+    return fillness;
+
+}
+
+function selectPaper() {
+    return document.getElementById('paperType').value;
 }
 
 var quantity = parseInt(document.getElementById('numberOf').value);
@@ -149,5 +115,4 @@ submitButton.onclick = function () {
     var sum = Math.round(((square * paper + square * fill) * quantity));
 
     document.getElementById('price').value = sum;
-
-}
+};
